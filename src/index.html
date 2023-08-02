@@ -58,17 +58,41 @@
     />
   </head>
   <body>
-    <textarea>
-      IP Address Tracker
-    
-      Search for any IP address or domain
-    
-      IP Address
-      Location
-      Timezone
-        UTC <!-- add offset value dynamically using the API -->
-      ISP
-    </textarea>
+    <main class="container">
+      <section class="details-section">
+        <h1>IP Address Tracker</h1>
+        <form action="">
+          <input
+            type="text"
+            placeholder="Search for any IP address or domain"
+          />
+          <button type="submit">
+            <img src="./images/icon-arrow.svg" alt="Arrow" />
+          </button>
+        </form>
+
+        <ul class="card">
+          <li>
+            <h2>IP Address</h2>
+            <p>103.109.236.0</p>
+          </li>
+          <li>
+            <h2>Location</h2>
+            <p>Dhaka, Dhaka Divition, Bangladesh - 1212</p>
+          </li>
+          <li>
+            <h2>Timezone</h2>
+            <p>UTC +6:00</p>
+          </li>
+          <li>
+            <h2>ISP</h2>
+            <p>Inspire Broadband</p>
+          </li>
+        </ul>
+      </section>
+      <div class="map-container"></div>
+    </main>
+
     <footer class="footer">
       <div class="attribution-wrapper">
         <p class="attribution">
