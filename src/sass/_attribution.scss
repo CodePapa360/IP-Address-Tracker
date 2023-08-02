@@ -1,0 +1,52 @@
+.attribution-wrapper {
+  background-color: rgb(0, 128, 96);
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+
+  .attribution {
+    --clr-attb-primary: yellow;
+    --clr-attb-secondary: #adad00;
+    --fs-attb: calc(1rem - 2px);
+    text-align: center;
+    line-height: 1.4;
+    font-size: var(--fs-attb);
+    padding: 0 0.5rem;
+    border-left: 2px solid var(--clr-attb-primary);
+    border-right: 2px solid var(--clr-attb-primary);
+    border-radius: 10px;
+    margin: auto;
+    max-width: -webkit-fit-content;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    @media screen and (min-width: 375px) {
+      flex-direction: row;
+    }
+
+    .attb-link {
+      color: var(--clr-attb-primary);
+      padding: 0 5px;
+      -webkit-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+      border-bottom: 2px dotted var(--clr-attb-primary);
+      font-size: calc(var(--fs-attb) + 4px);
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        color: var(--clr-attb-secondary);
+      }
+    }
+
+    .attb-fem {
+      font-size: calc(var(--fs-attb) / 1.1);
+    }
+  }
+}

@@ -1,0 +1,17 @@
+:root {
+  --very-dark-gray: hsl(0, 0%, 17%)
+--vark-gray: hsl(0, 0%, 59%)
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  font-family: 'Rubik', sans-serif;
+}
+
+.footer {
+  margin-top: auto;
+  padding: 1rem;
+}
