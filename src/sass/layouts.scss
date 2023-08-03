@@ -1,0 +1,119 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1440px;
+  margin: auto;
+
+  .details-section {
+    background-image: url(../images/pattern-bg-mobile.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 15rem;
+    padding: 1rem;
+    position: relative;
+
+    @media screen and (min-width: $bp-large) {
+      background-image: url(../images/pattern-bg-desktop.png);
+      height: 13rem;
+    }
+
+    &__heading {
+      color: var(--white);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    &__form {
+      display: flex;
+      max-width: 440px;
+      margin: auto;
+      margin-bottom: 1rem;
+
+      @media screen and (min-width: $bp-large) {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--white);
+        font-size: 1.2rem;
+        border: none;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        outline: none;
+
+        @media screen and (max-width: 440px) {
+          &::placeholder {
+            font-size: 0.9rem;
+          }
+        }
+      }
+
+      .btn-submit {
+        background-color: var(--very-dark-gray);
+        border: none;
+        padding: 1rem 1.5rem;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        cursor: pointer;
+
+        &:hover,
+        &:active {
+          background-color: var(--dark-gray);
+        }
+      }
+    }
+
+    .card {
+      background-color: var(--white);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      //   gap: 1rem;
+      text-align: center;
+      border-radius: 15px;
+      margin-bottom: -50%;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+      @media screen and (min-width: $bp-large) {
+        max-width: 46rem;
+        flex-direction: row;
+        padding: 1.5rem;
+        justify-content: space-between;
+
+        li:not(:first-child) {
+          border-left: 1px solid var(--dark-gray);
+        }
+      }
+
+      li {
+        padding: 0 1rem;
+
+        h2 {
+          font-weight: 500;
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          color: var(--dark-gray);
+          margin-bottom: 0.5rem;
+        }
+
+        p {
+          font-size: 1.2rem;
+          font-weight: 500;
+          color: var(--very-dark-gray);
+          line-height: 1;
+        }
+      }
+    }
+  }
+
+  .map-container {
+    height: 100%;
+  }
+}
