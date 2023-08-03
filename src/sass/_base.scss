@@ -2,6 +2,7 @@
   --very-dark-gray: hsl(0, 0%, 17%);
   --dark-gray: hsl(0, 0%, 59%);
   --white: white;
+  --detail-height: 15rem;
 }
 
 $bp-medium: 500px;
@@ -10,6 +11,12 @@ $bp-large: 700px;
 html {
   @media screen and (max-width: 320px) {
     font-size: 0.7rem;
+  }
+}
+
+@media screen and (min-width: $bp-large) {
+  :root {
+    --detail-height: 13rem;
   }
 }
 

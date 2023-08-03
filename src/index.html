@@ -56,6 +56,19 @@
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
   </head>
   <body>
     <main class="container">
@@ -63,7 +76,7 @@
         <h1 class="details-section__heading">IP Address Tracker</h1>
         <form action="" class="details-section__form">
           <input
-            class="form-input"
+            class="dearch-input"
             type="text"
             placeholder="Search for any IP address or domain"
           />
@@ -75,23 +88,23 @@
         <ul class="card">
           <li>
             <h2>IP Address</h2>
-            <p>192.212.174.101</p>
+            <p id="ip-address">192.212.174.101</p>
           </li>
           <li>
             <h2>Location</h2>
-            <p>Brooklyn, NY 10001</p>
+            <p id="location">Brooklyn, NY 10001</p>
           </li>
           <li>
             <h2>Timezone</h2>
-            <p>UTC -05:00</p>
+            <p id="timezone">UTC -05:00</p>
           </li>
           <li>
             <h2>ISP</h2>
-            <p>SpaceX Starlink</p>
+            <p id="isp">SpaceX Starlink</p>
           </li>
         </ul>
       </section>
-      <div class="map-container"></div>
+      <div id="map" class="map"></div>
     </main>
 
     <footer class="footer">
