@@ -10,18 +10,42 @@ const ipLocationEl = document.getElementById("location");
 const ipTimezoneEl = document.getElementById("timezone");
 const ipIspEl = document.getElementById("isp");
 
+///modal
+const renderModal = function (message) {
+  const modal = document.querySelector(".modal");
+  const msgEl = modal.querySelector(".error-message");
+  const btnModalClose = modal.querySelector(".btn-modal-close");
+  const body = document.querySelector("body");
+
+  msgEl.textContent = message;
+
+  modal.classList.add("show");
+  body.style.overflow = "hidden";
+
+  btnModalClose.addEventListener("click", function () {
+    modal.classList.remove("show");
+    body.style.overflow = "auto";
+  });
+};
+
 function isValidDomain(url) {
   const domainRegex =
     /^(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\/?/;
   const match = url.match(domainRegex);
 
-  return match && match[1] ? match[1] : false;
+  if (match) {
+    return match[1];
+  } else {
+    return false;
+  }
 }
 
 function isValidIPv4Address(ip) {
   const ipv4Regex =
     /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-  return ipv4Regex.test(ip) ? ip : false;
+
+  const test = ipv4Regex.test(ip);
+  return test ? ip : false;
 }
 
 function formatTimeOffset(seconds) {
@@ -36,60 +60,67 @@ function formatTimeOffset(seconds) {
 }
 
 async function getIpData(value) {
-  const url = `https://api.ipbase.com/v2/info?apikey=ipb_live_ScLMil3VvkHx2KxiRQPpSut9FMZ6MQCfs5WN0vW2&ip=${value}`;
+  try {
+    const key = process.env.ApiIpData;
+    const url = `https://api.ipdata.co/${value}?api-key=${key}`;
 
-  const { data } = await fetch(url).then((res) => res.json());
+    const data = await fetch(url).then((res) => res.json());
 
-  const dataObj = {
-    ip: data.ip,
-    isp: data.connection.isp,
-    city: data.location.city.name,
-    region: data.location.region.name,
-    country: data.location.country.name,
-    timezone: formatTimeOffset(data.timezone.gmt_offset),
-    zipCode: data.location.zip,
-    latitude: data.location.latitude,
-    longitude: data.location.longitude,
-  };
+    const dataObj = {
+      ip: data.ip,
+      isp: data.asn.name,
+      city: data.city,
+      region: data.region,
+      country: data.country_name,
+      timezone: formatTimeOffset(data.time_zone.offset),
+      zipCode: data.postal,
+      latitude: data.latitude,
+      longitude: data.longitude,
+    };
 
-  return dataObj;
+    return dataObj;
+  } catch (err) {
+    throw new Error("Something went wrong fetching the data!");
+  }
 }
 
 async function getDomainData(value) {
-  const key = "at_b5kLCsPUpTBodLQqaK8wrEXyfS3iE";
-  const url = `https://geo.ipify.org/api/v1?apiKey=${key}&domain=${value}`;
+  try {
+    const key = process.env.Domainkey;
+    const url = `https://geo.ipify.org/api/v1?apiKey=${key}&domain=${value}`;
 
-  const data = await fetch(url).then((res) => res.json());
+    const data = await fetch(url).then((res) => res.json());
 
-  const dataObj = {
-    ip: data.ip,
-    isp: data.isp,
-    city: data.location.city,
-    region: data.location.region,
-    country: data.location.country,
-    timezone: data.location.timezone,
-    zipCode: data.location.postalCode,
-    latitude: data.location.lat,
-    longitude: data.location.lng,
-  };
+    const dataObj = {
+      ip: data.ip,
+      isp: data.isp,
+      city: data.location.city,
+      region: data.location.region,
+      country: data.location.country,
+      timezone: data.location.timezone,
+      zipCode: data.location.postalCode,
+      latitude: data.location.lat,
+      longitude: data.location.lng,
+    };
 
-  return dataObj;
+    return dataObj;
+  } catch (err) {
+    throw new Error("Something went wrong fetching the data!");
+  }
 }
 
-const callApi = async function (value) {
-  try {
-    const ip = isValidIPv4Address(value);
-    const domain = isValidDomain(value);
+const callApi = function (value) {
+  const ip = isValidIPv4Address(value);
+  const domain = isValidDomain(value);
 
-    if (ip) {
-      return getIpData(ip);
-    }
+  if (!ip && !domain) throw new Error("Please input a valid IP/Domain!");
 
-    if (domain) {
-      return getDomainData(domain);
-    }
-  } catch (err) {
-    console.log(err);
+  if (ip) {
+    return getIpData(ip);
+  }
+
+  if (domain) {
+    return getDomainData(domain);
   }
 };
 
@@ -107,44 +138,50 @@ function waitForMapReady(map) {
   });
 }
 
-const setMap = function (latLon) {
+const setMap = function (latLon, ip) {
   if (!map) {
     map = L.map("map").setView(latLon, 13);
+    var myIcon = L.icon({
+      iconUrl: require("../images/icon-location.svg"),
+      iconSize: [46, 56],
+      iconAnchor: [32, 55],
+      popupAnchor: [-10, -50],
+    });
 
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    // Remove the existing marker (if any) and create a new one at the specified latLon
-    map.marker = L.marker(latLon)
+    map.marker = L.marker(latLon, { icon: myIcon })
       .addTo(map)
-      .bindPopup("A pretty CSS3 popup.<br> Easily customizable.")
+      .bindPopup(ip)
       .openPopup();
   } else {
     waitForMapReady(map).then(() => {
       setTimeout(() => {
         map.flyTo(latLon, 16, {
-          duration: 2, // Adjust the duration (in seconds) as needed
-          easeLinearity: 0.25, // Adjust the easing value as needed
+          duration: 2,
+          easeLinearity: 0.25,
         });
 
-        // Update the marker position after the flyTo animation is completed
-        map.marker.setLatLng(latLon);
-      }, 100); // Use a small delay to ensure the map is fully loaded
+        map.marker.setLatLng(latLon).bindPopup(ip).openPopup();
+      }, 200);
     });
   }
 };
 
 //
 const renderCard = function (data) {
-  const location = `${data.city}, ${data.region}, ${data.country} ${data.zip}`;
+  const location = `${data.city ? data.city : ""}, ${
+    data.region ? data.region : ""
+  }, ${data.country} ${data.zip ? data.zip : ""}`;
 
-  ipAddressEl.textContent = data.ip;
+  ipAddressEl.textContent = data.ip ? data.ip : "Not found";
   ipLocationEl.textContent = location;
-  ipTimezoneEl.textContent = data.timezone;
-  ipIspEl.textContent = data.isp;
-  inputEl.value = data.ip;
+  ipTimezoneEl.textContent = data.timezone ? data.timezone : "Not found";
+  ipIspEl.textContent = data.isp ? data.isp : "Not found";
+  inputEl.value = data.ip ? data.ip : "Not found";
 };
 
 //render
@@ -155,16 +192,21 @@ btnSubmit.addEventListener("click", function (e) {
 });
 
 const renderData = async function (input) {
-  const data = await callApi(input);
-  const latLon = [data.latitude, data.longitude];
+  try {
+    const data = await callApi(input);
 
-  setMap(latLon, 13);
+    const latLon = [data.latitude, data.longitude];
 
-  renderCard(data);
+    setMap(latLon, data.ip);
+
+    renderCard(data);
+  } catch (error) {
+    renderModal(error);
+  }
 };
 
 const load = await getIpData("");
 const latLon = [load.latitude, load.longitude];
 
-setMap(latLon, 13);
+setMap(latLon, load.ip);
 renderCard(load);
