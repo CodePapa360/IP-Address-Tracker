@@ -66,11 +66,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  transition: all 0.4s ease;
-
-  opacity: 1;
-  visibility: visible;
-  pointer-events: all;
+  opacity: 0;
+  visibility: hidden;
+  animation: fadeInOut 2s ease 1 forwards;
+  user-select: none;
 
   &__content {
     max-width: 30rem;
@@ -80,6 +79,7 @@
     img {
       max-height: 16rem;
       width: auto;
+      pointer-events: none;
     }
 
     h1 {
@@ -96,8 +96,21 @@
   }
 }
 
-.my-profile.hide {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+@keyframes fadeInOut {
+  0% {
+    opacity: 1;
+    visibility: visible;
+    user-select: all;
+  }
+  70% {
+    opacity: 1;
+    visibility: visible;
+    user-select: all;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    user-select: none;
+  }
 }
