@@ -9,20 +9,20 @@ import { requestApi } from "./utils/requestApi.js";
   const form = document.getElementById("form");
   const inputEl = document.querySelector(".dearch-input");
 
-  setTimeout(() => {
-    const myProfile = document.querySelector(".my-profile");
-    myProfile.classList.add("hide");
-  }, 1000);
+  // setTimeout(() => {
+  //   const myProfile = document.querySelector(".my-profile");
+  //   myProfile.classList.add("hide");
+  // }, 1000);
 
-  document.addEventListener("DOMContentLoaded", async function () {
-    const data = await requestApi("load");
-    const mapData = {
-      latLon: [data.latitude, data.longitude],
-      ip: data.ip,
-    };
-    map.createMap(mapData);
-    renderCard(data);
-  });
+  // document.addEventListener("DOMContentLoaded", async function () {
+  //   const data = await requestApi("load");
+  //   const mapData = {
+  //     latLon: [data.latitude, data.longitude],
+  //     ip: data.ip,
+  //   };
+  //   map.createMap(mapData);
+  //   renderCard(data);
+  // });
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
