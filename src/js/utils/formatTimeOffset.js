@@ -1,13 +1,8 @@
 "use strict";
 export function formatTimeOffset(seconds) {
-  if (!seconds) return "Not found";
+  const sign = seconds.slice(0, 1);
+  const hours = seconds.slice(1, 3);
+  const minutes = seconds.slice(3);
 
-  const sign = seconds < 0 ? "-" : "+";
-  const absoluteSeconds = Math.abs(seconds);
-  const hours = String(Math.floor(absoluteSeconds / 3600)).padStart(2, "0");
-  const minutes = String(Math.floor((absoluteSeconds % 3600) / 60)).padStart(
-    2,
-    "0"
-  );
   return `${sign}${hours}:${minutes}`;
 }

@@ -12,11 +12,11 @@ export function renderCard(data) {
     .map(([_, value]) => value)
     .join(", ");
 
-  const location = `${extractedValues} ${data.zip ? data.zip : ""}`;
+  const location = `${extractedValues} ${data.zip ?? ""}`;
 
-  ipAddressEl.textContent = data.ip ? data.ip : "Not found";
+  ipAddressEl.textContent = data.ip ?? "Not found";
   ipLocationEl.textContent = location;
-  ipTimezoneEl.textContent = data.timezone ? data.timezone : "Not found";
-  ipIspEl.textContent = data.isp ? data.isp : "Not found";
-  inputEl.value = data.ip ? data.ip : "Not found";
+  ipTimezoneEl.textContent = data.timezone ?? "Not found";
+  ipIspEl.textContent = data.isp ?? "Not found";
+  inputEl.value = data.ip ?? "Not found";
 }
