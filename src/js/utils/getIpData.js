@@ -22,6 +22,6 @@ export async function getIpData(value) {
 
     return dataObj;
   } catch (err) {
-    throw new Error("Something went wrong fetching the data!");
+    throw new Error("Something went wrong while fetching data!");
   }
 }
