@@ -20,12 +20,14 @@ import { requestApi } from "./utils/requestApi.js";
       latLon: [data.latitude, data.longitude],
       ip: data.ip,
     };
+
     map.createMap(mapData);
     renderCard(data);
   });
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
+    inputEl.blur();
 
     const { value } = inputEl;
     renderData(value);
