@@ -50,3 +50,53 @@
     }
   }
 }
+
+///////////
+/// my profile
+.my-profile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(0, 23, 36);
+  z-index: 2000;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.4s ease;
+
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+
+  &__content {
+    max-width: 30rem;
+    text-align: center;
+
+    img {
+      max-height: 16rem;
+      width: auto;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: rgb(0, 247, 255);
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: normal;
+      opacity: 0.6;
+      color: rgb(0, 247, 255);
+    }
+  }
+}
+
+.my-profile.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
