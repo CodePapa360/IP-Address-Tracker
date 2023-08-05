@@ -6,7 +6,7 @@ import { renderCard } from "./components/renderCard";
 import { requestApi } from "./utils/requestApi.js";
 
 (function () {
-  const btnSubmit = document.querySelector(".btn-submit");
+  const form = document.getElementById("form");
   const inputEl = document.querySelector(".dearch-input");
 
   document.addEventListener("DOMContentLoaded", async function () {
@@ -20,7 +20,7 @@ import { requestApi } from "./utils/requestApi.js";
     renderCard(data);
   });
 
-  btnSubmit.addEventListener("click", function (event) {
+  form.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const { value } = inputEl;
