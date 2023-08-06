@@ -20,12 +20,19 @@ import { requestApi } from "./utils/requestApi.js";
     renderCard(data);
   });
 
+  let preValue;
+
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
     inputEl.blur();
     const { value } = inputEl;
+
+    if (preValue === value) return;
+
+    preValue = value;
     renderData(value);
+    inputEl.value = "";
   });
 
   async function renderData(input) {

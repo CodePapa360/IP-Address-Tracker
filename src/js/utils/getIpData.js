@@ -22,6 +22,7 @@ export async function getIpData(value) {
 
     return dataObj;
   } catch (err) {
+    console.log(err);
     throw new Error("Something went wrong while fetching data!");
   }
 }

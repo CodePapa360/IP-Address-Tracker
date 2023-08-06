@@ -1,6 +1,5 @@
 "use strict";
 export function renderCard(data) {
-  const inputEl = document.querySelector(".dearch-input");
   const ipAddressEl = document.getElementById("ip-address");
   const ipLocationEl = document.getElementById("location");
   const ipTimezoneEl = document.getElementById("timezone");
@@ -18,5 +17,4 @@ export function renderCard(data) {
   ipLocationEl.textContent = location;
   ipTimezoneEl.textContent = data.timezone ?? "Not found";
   ipIspEl.textContent = data.isp ?? "Not found";
-  inputEl.value = data.ip ?? "Not found";
 }
