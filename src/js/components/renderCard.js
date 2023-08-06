@@ -12,7 +12,7 @@ export function renderCard(data) {
     .map(([_, value]) => value)
     .join(", ");
 
-  const location = `${extractedValues} ${data.zip ?? ""}`;
+  const location = `${extractedValues} ${data.zipCode ?? ""}`;
 
   ipAddressEl.textContent = data.ip ?? "Not found";
   ipLocationEl.textContent = location;
