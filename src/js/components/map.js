@@ -26,28 +26,14 @@ class Map {
   }
 
   flyingTo(data) {
-    this.waitForMapReady(this.#map).then(() => {
-      setTimeout(() => {
-        const viewLatlon = [data.latLon[0] + 0.015, data.latLon[1]];
+    const viewLatlon = [data.latLon[0] + 0.015, data.latLon[1]];
 
-        this.#map.flyTo(viewLatlon, 13, {
-          duration: 4,
-          easeLinearity: 0.25,
-        });
-
-        this.#map.marker.setLatLng(data.latLon).bindPopup(data.ip).openPopup();
-      }, 100);
+    this.#map.flyTo(viewLatlon, 13, {
+      duration: 3,
+      easeLinearity: 0.1,
     });
-  }
 
-  waitForMapReady(map) {
-    return new Promise((resolve) => {
-      if (map._loaded) {
-        resolve();
-      } else {
-        map.whenReady(resolve);
-      }
-    });
+    this.#map.marker.setLatLng(data.latLon).bindPopup(data.ip).openPopup();
   }
 }
 
