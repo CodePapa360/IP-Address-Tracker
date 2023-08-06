@@ -31,7 +31,7 @@ class Map {
         const viewLatlon = [data.latLon[0] + 0.015, data.latLon[1]];
 
         this.#map.flyTo(viewLatlon, 13, {
-          duration: 2,
+          duration: 4,
           easeLinearity: 0.25,
         });
 
