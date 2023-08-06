@@ -68,7 +68,7 @@
   flex-direction: column;
   opacity: 0;
   visibility: hidden;
-  animation: fadeInOut 2s ease 1 forwards;
+  animation: fadeInOut 3s ease 1 forwards;
   user-select: none;
 
   &__content {
@@ -80,11 +80,13 @@
       max-height: 16rem;
       width: auto;
       pointer-events: none;
+      margin-bottom: 2rem;
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: 3rem;
       color: rgb(0, 247, 255);
+      animation: slideUp 2s ease 1 forwards;
     }
 
     h2 {
@@ -92,6 +94,7 @@
       font-weight: normal;
       opacity: 0.6;
       color: rgb(0, 247, 255);
+      animation: slideUp 2s ease 1 forwards 0.2s;
     }
   }
 }
@@ -112,5 +115,21 @@
     opacity: 0;
     visibility: hidden;
     user-select: none;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
