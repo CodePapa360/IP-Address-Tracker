@@ -1,10 +1,15 @@
-import L from "leaflet";
+import L, { Map as LeafletMap, LatLngExpression, Marker } from "leaflet";
+import { MapData } from "../index";
 
 class Map {
-  #map = null;
+  #map: LeafletMap | undefined;
+  #marker: Marker | undefined;
 
-  createMap(data) {
-    const viewLatlon = [data.latLon[0] + 0.015, data.latLon[1]];
+  createMap(data: MapData): void {
+    const viewLatlon: LatLngExpression = [
+      data.latLon[0] + 0.015,
+      data.latLon[1],
+    ];
 
     this.#map = L.map("map").setView(viewLatlon, 13);
     var myIcon = L.icon({
@@ -19,21 +24,25 @@ class Map {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
 
-    this.#map.marker = L.marker(data.latLon, { icon: myIcon })
+    this.#marker = L.marker(data.latLon, { icon: myIcon })
       .addTo(this.#map)
-      .bindPopup(data.ip)
+      .bindPopup(data.isp)
       .openPopup();
   }
 
-  flyingTo(data) {
-    const viewLatlon = [data.latLon[0] + 0.015, data.latLon[1]];
+  flyingTo(data: MapData): void {
+    if (!this.#map || !this.#marker) return;
+    const viewLatlon: LatLngExpression = [
+      data.latLon[0] + 0.015,
+      data.latLon[1],
+    ];
 
     this.#map.flyTo(viewLatlon, 13, {
       duration: 3,
       easeLinearity: 0.1,
     });
 
-    this.#map.marker.setLatLng(data.latLon).bindPopup(data.ip).openPopup();
+    this.#marker.setLatLng(data.latLon).bindPopup(data.isp).openPopup();
   }
 }
 

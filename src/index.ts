@@ -6,9 +6,9 @@ import { renderCard } from "./components/renderCard";
 import { requestApi } from "./utils/requestApi";
 import { getIpData } from "./utils/getIpData";
 
-interface MapData {
+export interface MapData {
   latLon: [number, number];
-  ip: string;
+  isp: string;
 }
 
 export interface ApiData {
@@ -34,7 +34,7 @@ export interface ApiData {
 
     const mapData: MapData = {
       latLon: [data.latitude, data.longitude],
-      ip: data.ip,
+      isp: data.isp,
     };
 
     map.createMap(mapData);
@@ -56,7 +56,6 @@ export interface ApiData {
     renderData(value);
 
     inputEl.value = "";
-    inputEl.blur();
   });
 
   async function renderData(input: string) {
@@ -65,7 +64,7 @@ export interface ApiData {
 
       const mapData: MapData = {
         latLon: [data.latitude, data.longitude],
-        ip: data.ip,
+        isp: data.isp,
       };
 
       map.flyingTo(mapData);
