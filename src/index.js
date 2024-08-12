@@ -1,5 +1,5 @@
 "use strict";
-import "../sass/main.scss";
+import "./sass/main.scss";
 import map from "./components/map.js";
 import { renderError } from "./components/modal.js";
 import { renderCard } from "./components/renderCard";

@@ -8,7 +8,7 @@ class Map {
 
     this.#map = L.map("map").setView(viewLatlon, 13);
     var myIcon = L.icon({
-      iconUrl: require("../../images/icon-location.svg"),
+      iconUrl: require("../images/icon-location.svg"),
       iconSize: [46, 56],
       iconAnchor: [32, 55],
       popupAnchor: [-10, -50],

@@ -1,4 +1,5 @@
 const path = require("path");
+
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -6,7 +7,7 @@ const webpack = require("webpack");
 require("dotenv").config();
 
 module.exports = {
-  entry: "./src/js/index.js",
+  entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -28,7 +29,7 @@ module.exports = {
         loader: "html-loader",
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif|svg|webp)$/i,
         type: "asset/resource",
         generator: {
           filename: "images/[name].[hash].[ext]",
@@ -50,7 +51,7 @@ module.exports = {
     }),
 
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: "./index.html",
     }),
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
