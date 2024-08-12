@@ -4,14 +4,35 @@ import map from "./components/map";
 import { renderError } from "./components/modal";
 import { renderCard } from "./components/renderCard";
 import { requestApi } from "./utils/requestApi";
+import { getIpData } from "./utils/getIpData";
+
+interface MapData {
+  latLon: [number, number];
+  ip: string;
+}
+
+export interface ApiData {
+  ip: string;
+  isp: string;
+  city: string;
+  region: string;
+  country: string;
+  timezone: string;
+  zipCode: string;
+  latitude: number;
+  longitude: number;
+}
 
 (function () {
-  const form = document.getElementById("form");
-  const inputEl = document.querySelector(".dearch-input");
+  const form = document.getElementById("form") as HTMLFormElement | null;
+  const inputEl = document.querySelector(
+    ".search-input"
+  ) as HTMLInputElement | null;
 
   document.addEventListener("DOMContentLoaded", async function () {
-    const data = await requestApi("load");
-    const mapData = {
+    const data: ApiData = await getIpData();
+
+    const mapData: MapData = {
       latLon: [data.latitude, data.longitude],
       ip: data.ip,
     };
@@ -20,26 +41,29 @@ import { requestApi } from "./utils/requestApi";
     renderCard(data);
   });
 
-  let preValue;
+  let preValue: string = "";
 
-  form.addEventListener("submit", function (event) {
+  form?.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    inputEl.blur();
+    if (!inputEl?.value) return;
+
     const { value } = inputEl;
 
     if (preValue === value) return;
-
     preValue = value;
+
     renderData(value);
+
     inputEl.value = "";
+    inputEl.blur();
   });
 
-  async function renderData(input) {
+  async function renderData(input: string) {
     try {
-      const data = await requestApi(input);
+      const data: ApiData = await requestApi(input);
 
-      const mapData = {
+      const mapData: MapData = {
         latLon: [data.latitude, data.longitude],
         ip: data.ip,
       };
