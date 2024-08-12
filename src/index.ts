@@ -1,9 +1,9 @@
 "use strict";
 import "./sass/main.scss";
-import map from "./components/map.js";
-import { renderError } from "./components/modal.js";
+import map from "./components/map";
+import { renderError } from "./components/modal";
 import { renderCard } from "./components/renderCard";
-import { requestApi } from "./utils/requestApi.js";
+import { requestApi } from "./utils/requestApi";
 
 (function () {
   const form = document.getElementById("form");

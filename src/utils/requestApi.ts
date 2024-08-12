@@ -1,8 +1,8 @@
 "use strict";
-import { isValidDomain } from "./isValidDomain.js";
-import { isValidIPv4Address } from "./isValidIPv4Address.js";
-import { getDomainData } from "./getDomainData.js";
-import { getIpData } from "./getIpData.js";
+import { isValidDomain } from "./isValidDomain";
+import { isValidIPv4Address } from "./isValidIPv4Address";
+import { getDomainData } from "./getDomainData";
+import { getIpData } from "./getIpData";
 
 export function requestApi(value) {
   if (value === "load") return getIpData("");

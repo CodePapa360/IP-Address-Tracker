@@ -7,10 +7,13 @@ const webpack = require("webpack");
 require("dotenv").config();
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
   },
   mode: "development",
   devServer: {
@@ -20,6 +23,11 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
       {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],

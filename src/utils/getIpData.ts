@@ -1,5 +1,6 @@
 "use strict";
-import { formatTimeOffset } from "./formatTimeOffset.js";
+
+import { formatTimeOffset } from "./formatTimeOffset";
 
 export async function getIpData(value) {
   try {
