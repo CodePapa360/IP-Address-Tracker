@@ -6,7 +6,7 @@
   margin: auto;
 
   .details-section {
-    background-image: url(../images/pattern-bg-mobile.png);
+    background-image: url(/images/pattern-bg-mobile.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -16,7 +16,7 @@
     z-index: 2;
 
     @media screen and (min-width: $bp-large) {
-      background-image: url(../images/pattern-bg-desktop.png);
+      background-image: url(/images/pattern-bg-desktop.png);
     }
 
     &__heading {
@@ -35,7 +35,7 @@
         margin-bottom: 1.5rem;
       }
 
-      .dearch-input {
+      .search-input {
         width: 100%;
         padding: 1rem;
         background-color: var(--white);
