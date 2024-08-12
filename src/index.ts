@@ -41,7 +41,7 @@ export interface ApiData {
     renderCard(data);
   });
 
-  let preValue: string = "";
+  let oldValue: string = "";
 
   form?.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -50,8 +50,8 @@ export interface ApiData {
 
     const { value } = inputEl;
 
-    if (preValue === value) return;
-    preValue = value;
+    if (oldValue === value) return;
+    oldValue = value;
 
     renderData(value);
 
@@ -70,7 +70,7 @@ export interface ApiData {
       map.flyingTo(mapData);
       renderCard(data);
     } catch (error) {
-      renderError(error);
+      renderError((error as Error).message);
     }
   }
 })();

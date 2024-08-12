@@ -1,14 +1,20 @@
 "use strict";
-export function renderCard(data) {
-  const ipAddressEl = document.getElementById("ip-address");
-  const ipLocationEl = document.getElementById("location");
-  const ipTimezoneEl = document.getElementById("timezone");
-  const ipIspEl = document.getElementById("isp");
 
-  const keysToExtract = ["city", "region", "country"];
+import { ApiData } from "../index";
+
+export function renderCard(data: ApiData) {
+  const ipAddressEl = document.getElementById("ip-address") as HTMLSpanElement;
+  const ipLocationEl = document.getElementById("location") as HTMLSpanElement;
+  const ipTimezoneEl = document.getElementById("timezone") as HTMLSpanElement;
+  const ipIspEl = document.getElementById("isp") as HTMLSpanElement;
+
+  const keysToExtract: (keyof ApiData)[] = ["city", "region", "country"];
   const extractedValues = Object.entries(data)
-    .filter(([key, value]) => keysToExtract.includes(key) && value !== null)
-    .map(([_, value]) => value)
+    .filter(
+      ([key, value]) =>
+        keysToExtract.includes(key as keyof ApiData) && value !== null
+    )
+    .map(([_, value]) => value as string)
     .join(", ");
 
   const location = `${extractedValues} ${data.zipCode ?? ""}`;
